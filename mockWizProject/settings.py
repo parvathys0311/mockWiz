@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,8 +79,12 @@ WSGI_APPLICATION = 'mockWizProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mockWizDB',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST':'127.0.0.1',
+        'PORT': '3307',
     }
 }
 
@@ -125,3 +130,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS= [
     os.path.join(BASE_DIR,'mockWizProject/static')
 ]
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

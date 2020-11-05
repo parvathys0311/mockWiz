@@ -1,0 +1,52 @@
+/* imports */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+
+/* heading text */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+h1{
+  font-size: 3;
+}
+
+/* body text */
+body{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  /* font size: default is usually 16px */
+  font-size: 16px;
+    
+  /* line-height (called leading in print design); browser default is usually 1.2. Try for a minimum of 1.5, max should be less than 2 */
+  line-height: 1.7;
+  color: #222222;
+}
+
+button {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+.contact p{
+  font-size: 0.9em;
+}
+
+.font-small {
+  font-size: 0.8em;
+}
+
+.title-small{
+  font-size: 0.9em;
+  padding-top: 1em;
+}
+
+.font-copyright {
+  font-size: 0.7em;
+  color: grey;
+  padding: 1em;
+}
+

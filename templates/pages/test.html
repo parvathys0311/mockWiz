@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="text-align: center">Home</h2>
+<div style="margin-left: 30px;">
+<h3>Candidate Form</h3>
+<form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="form-group row mt-5">
+        <label>First Name <span class="form-required" title="This field is required.">*</span></label>
+            {{form.formcd.firstName}}
+    </div>
+    </br>
+    <div class="form-group row mt-5">
+        <label>Email <span class="form-required" title="This field is required.">*</span></label>
+            {{form.formcd.email}}
+
+    </div>
+    </br>
+<!--    <div class="form-group row mt-5">-->
+<!--        <label for="Name">First Name <span class="form-required" title="This field is required.">*</span></label>-->
+<!--        <input type="text" id="Name" name="name" value="" size="60" maxlength="60" class="required">-->
+<!--    </div>-->
+<!--    <div class="form-group row mt-5">-->
+<!--        <label for="Email"> Email <span class="form-required" title="This field is required.">*</span></label>-->
+<!--        <input type="text" id="Email" name="email" value="" size="60" maxlength="60" class="required">-->
+<!--    </div>-->
+    <div class="form-group row mt-5">
+        <label>Role <span class="form-required" title="This field is required.">*</span></label>
+            {{form.formcd.interestedRole}}
+    </div>
+    </br>
+    <input type="submit" class="btn btn-primary" value="Submit" name="submit-cdd">
+<!--&lt;!&ndash;    <div class="alert alert-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;        <p> {{message}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+</form>
+</br>
+     <div>{{form.formcd.email.errors | striptags}}</div>
+    {{ form.non_field_errors }}
+</br>
+<h3>Expert Form</h3>
+<form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="form-group row mt-5">
+        <label>First Name <span class="form-required" title="This field is required.">*</span></label>
+            {{form.formex.firstName}}
+    </div>
+    </br>
+    <div class="form-group row mt-5">
+        <label>Email <span class="form-required" title="This field is required.">*</span></label>
+            {{form.formex.email}}
+    </div>
+    </br>
+    <div class="form-group row mt-5">
+        <label>Function <span class="form-required" title="This field is required.">*</span></label>
+            {{form.formex.expertiseFunction}}
+    </div>
+    </br>
+    <input type="submit" class="btn btn-primary" value="Submit" name="submit-exp">
+</form>
+</br>
+    <div class="errorlist">{{form.formex.email.errors | striptags}}</div>
+</br>
+{% include 'partials/_alerts.html' %}
+</br>
+</div>
+
+{% endblock %}

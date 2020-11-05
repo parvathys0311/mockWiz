@@ -1,0 +1,15 @@
+{% load static %}
+<!--Header-->
+<header>
+    <div class="logo-item">
+        <a href="{% url 'home' %}"><img class="logo" src="{% static './images/logo.png' %}" alt="MockWiz Logo"></a>
+    </div>
+    <div class="toggle"><a href="#"><i class="fas fa-bars"></i></a></div>
+    <nav>
+        <ul class="container_nav">
+            <li class="item"><a href="#hiw">How it works</a></li>
+            <li class="item"><a href="#faq">FAQ</a></li>
+            <li class="item"><a href="#int">Experienced Interviewer?</a></li>
+        </ul>
+    </nav>
+</header>

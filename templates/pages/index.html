@@ -1,5 +1,147 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-<h1>Home</h1>
+
+<main>
+      <!-- HERO Section  -->
+      <section class="background-1">
+        <div class="hero container">
+          <div class="hero1">
+            <h1>Practice virtual mock interviews with experienced professionals.</h1>
+            <p>Build your confidence and get hired faster.</p>
+            <div>
+              <form action="#">
+                <ul>
+                  <li>
+                    <input type="text" name="name" placeholder="First Name">
+                  </li>
+                  <li>
+                    <input type="text" name="_replyto" placeholder="Email Address">
+                  </li>
+                  <select id="role" class="selectCdd">
+                    <option value="null" disabled selected>Select your desired role</option>
+                    <option value="1" class="color">System Analyst</option>
+                    <option value="2">Accountant</option>
+                    <option value="3">Rig Manager</option>
+                    <option value="4">Data Scientist</option>
+                  </select>
+                  <li>
+                    <button type="submit" class="font-small" id="cdd-button">Submit</button>
+                  </li>
+                  <li>
+                    <p class="font-small">By clicking Submit, you consent to our Terms of Use</p>
+                  </li>
+                  <!-- <input type="submit" value="Submit"> -->
+                </ul>
+              </form>
+            </div>
+          </div>
+          <div class="hero2">
+            <img class="hero-image" src="{% static './images/dr-13_4x (1).png' %}">
+          </div>
+        </div>
+      </section>
+      <!-- How it works -->
+      <section class="background-2">
+        <div class="container_1 outer-container flex-box column" id="hiw">
+          <h2 class="inner-container">How it works</h2>
+          <div class="flex-box inner-container">
+            <div class="sub-container flex-box">
+              <div><img class="image-icon" src="{% static './images/one.png' %}"></div>
+              <p>Fill a simple form to get matched with experienced interviewers</p>
+            </div>
+            <div class="sub-container flex-box">
+              <div><img class="image-icon" src="{% static './images/two.png' %}"></div>
+              <p>Review your match & pay $89 to schedule mock interview session</p>
+            </div>
+            <div class="sub-container flex-box">
+              <div><img class="image-icon" src="{% static './images/three.png' %}"></div>
+              <p>Practice your interviewing skills and get live feedback</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="background-1">
+        <div class="container_1 flex-box column" id="faq">
+          <h3>Frequently Asked Questions</h3>
+          <div class="accordion flex-box column" id="acc">
+            <div class="accordion-item flex-box column panel">
+              <button class="accordion-button"><span class="accordion-title">What kind of
+                  professionals can I interview with?</span><span class="accordion-icon"
+                  aria-hidden="true"></span></button>
+              <div class="accordion-content">
+                <p>You can practice general interviewing skills with recruiters, or role-specific skills with
+                  experienced
+                  professionals in various domains such as data science, marketing, technology, finance, product
+                  management, software development, etc.</p>
+              </div>
+            </div>
+            <div class="accordion-item flex-box column panel">
+              <button class="accordion-button"><span class="accordion-title">What kind of
+                  professionals can I interview with?</span><span class="accordion-icon"
+                  aria-hidden="true"></span></button>
+              <div class="accordion-content">
+                <p>You can practice general interviewing skills with recruiters, or role-specific skills with
+                  experienced
+                  professionals in various domains such as data science, marketing, technology, finance, product
+                  management, software development, etc.</p>
+              </div>
+            </div>
+            <div class="accordion-item flex-box column panel">
+              <button class="accordion-button"><span class="accordion-title">What kind of
+                  professionals can I interview with?</span><span class="accordion-icon"
+                  aria-hidden="true"></span></button>
+              <div class="accordion-content">
+                <p>You can practice general interviewing skills with recruiters, or role-specific skills with
+                  experienced
+                  professionals in various domains such as data science, marketing, technology, finance, product
+                  management, software development, etc.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- expert form -->
+      <section class="background-2">
+        <div class="exForm container_1 flex-box wrap" id="int">
+          <div class="flex-box column ex_containerPara">
+            <h2>Earn extra income by using your interviewing experience to help others</h2>
+            <p>Fill this form to get details about our partner program</p>
+          </div>
+          <div class="exFlexItem">
+            <form action="#" class="form_expert">
+              <ul class="ex_containerForm">
+                <li>
+                  <input type="text" name="name" placeholder="First Name" class="ex-input">
+                </li>
+                <li>
+                  <input type="text" name="_replyto" placeholder="Email Address" class="ex-input">
+                </li>
+                <select id="function" class="ex-input selectEx">
+                  <option value="" disabled selected>Select your function</option>
+                  <option value="1" class="color">Oil & Gas</option>
+                  <option value="2">Manufacturing</option>
+                  <option value="3">Information technology</option>
+                  <option value="4">Finance</option>
+                </select>
+                <li>
+                  <button type="submit" class="button-default" id="ex-button">Submit</button>
+                </li>
+                <li>
+                  <p class="font-small">By clicking Submit, you consent to our Terms of Use</p>
+                </li>
+                <!-- <input type="submit" value="Submit"> -->
+              </ul>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
 {% endblock %}

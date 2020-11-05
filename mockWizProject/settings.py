@@ -131,6 +131,8 @@ STATICFILES_DIRS= [
     os.path.join(BASE_DIR,'mockWizProject/static')
 ]
 
+from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger'
+    messages.ERROR:'danger',
 }
+

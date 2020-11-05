@@ -1,0 +1,350 @@
+body{
+  -webkit-text-size-adjust: none;
+}
+/****************************/
+/* Main - Index  */
+/****************************/
+
+/* HERO Section */
+.container {
+  max-width: 1200px;
+  margin:0 auto;
+  padding:1em 1em;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  /* background-image: url('../images/dr-13_4x\ \(1\).png'); */
+  /* background-size: cover;
+  background-position: center;   */
+  min-height:80vh;
+}
+
+.hero1{
+  /* margin: 1em;
+  padding-left: 1.6em; */
+  width: 100%;
+}
+
+.hero2{
+  /* width: 50%; */
+  min-height:60%; 
+  width: 100%;
+  justify-content: end;
+  align-items: flex-end;
+}
+
+.hero-image{
+  width: 100%;
+}
+.background-1{
+  background-color: rgb(245, 245, 245);
+}
+
+.background-2{
+  background-color: none;
+}
+
+form ul { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input, select, option {
+  margin-top: 0.8em;
+  padding: 0.4em 0;
+
+  border:0;
+  border-bottom: 0.5px solid rgb(116, 114, 114);
+
+  font-family:inherit;
+  font-size: 0.9rem;
+
+  width: 70%;
+  background-color: transparent;
+}
+
+input:focus, select:focus{
+  outline: none;
+}
+
+.selectEx, .selectCdd {
+  color: #999;
+}
+
+option:not(first-child) {color:#999}
+
+textarea {
+  resize: vertical;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #999;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #999;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #999;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #999;
+}
+
+select {
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url(../images/chevron-down-solid.svg) no-repeat;
+    background-position: right center;
+    background-size: 10px;
+}
+
+button { 
+  -webkit-appearance: none;
+  text-align: center;
+  color: white;
+  background-color: #ff5a5f;
+  /* box-shadow:0 0 15px 4px rgba(0,0,0,0.06); */
+  border: none;
+  border-radius: 5px;
+  padding: 0.7rem 2rem;
+  margin-top: 1.2rem;
+
+  align-self: center;
+} 
+
+button:hover {
+  background-color: #ff5a609a;
+}  
+
+/* How it works */
+
+.image-icon{
+  height: 60px;
+}
+
+.flex-box{
+  display: flex;
+}
+
+.column{
+  flex-direction: column;
+}
+
+.outer-container{
+  justify-content: center;
+}
+
+.inner-container{
+  justify-content: left;
+  flex-direction: column;
+}
+
+.sub-container{
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* padding: 1em; */
+  width: 100%;
+}
+
+.sub-container div{
+  text-align: center;
+}
+
+.container_1{
+  max-width: 1200px;
+  margin:2em auto;
+  /* margin-right: 0; */
+  padding: 1em;
+}
+
+.accordion{
+  /* align-items: center; */
+  /* justify-content: flex-start; */
+  padding-bottom: 2em;
+}
+
+.accordion-item{
+   /* width: 50%; */
+   /* justify-content: left;
+   padding: 0; */
+} 
+/* 
+.accordion-button[aria-expanded='false'] {
+    border-bottom: 1px solid blue;
+    background-color: grey;
+} */
+
+.accordion-button{
+  -webkit-appearance: none;
+  background-color: white;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  /* font-size: inherit; */
+  font-weight: bold;
+}
+
+.accordion-title {
+  padding: 1em 1.5em 1em 0;
+  color: black;
+} 
+
+/* .accordion-icon{
+  display: inline-block;
+  position: absolute;
+      top: 18px;
+      right: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid;
+      border-radius: 22px;
+} */
+
+/* .accordion-icon::before {
+  display: block;
+  position: absolute;
+  content: '+';
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+} */
+
+/* .accordion-icon::after {
+  display: block;
+  position: absolute;
+  content: '-';
+  top: 5px;
+  left: 9px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+} */
+
+.accordion-content{
+  width: 100%;
+  text-align: left;
+  padding: 0 18px;
+  /* background-color: white; */
+  /* display: none; */
+  overflow: hidden;
+  margin: auto;
+}
+
+#acc .accordion-content{
+  display: none;
+}
+
+#acc .active .accordion-content{
+  display : block;
+}
+
+#acc .active .accordion-button {
+  border-bottom: 1px solid #ff5a5f;
+  border-right: 1px solid #ff5a5f;
+}
+
+.exForm {
+  flex-direction: column;
+}
+
+.ex_containerPara{
+  width: 100%;
+}
+
+.ex-input{
+  width:90%;
+}
+
+#ex-button{
+  background-color: #00c8c5;
+}
+
+.ex_containerForm {
+  margin: auto;
+}
+
+@media (orientation: landscape) {
+
+  .hero {
+    flex-direction: row;
+  }
+
+  .hero1{
+    /* margin: 1em;
+    padding-left: 1.6em; */
+    width: 70%;
+    flex:2;
+  }
+
+  .hero2{
+    margin: 0;
+    flex:1;
+    width: 50%;
+    min-height:100%; 
+  }
+
+  input,select, option {
+    width: 40%;
+  }
+
+  .inner-container{
+    flex-direction: row;
+    padding-bottom: 1em;
+  }
+
+  .sub-container{
+    width: 420px;
+  }
+
+  .sub-container div{
+    text-align: left;
+  }
+
+  .accordion-item {
+    width: 70%;
+  }
+
+  .exForm {
+    flex-direction: row;
+  }
+
+  .exFlexItem{
+    /* text-align: right; */
+    width: 50%;
+    /* align-items: flex-end; */
+  }
+
+  .form_expert{
+    width: 90%;
+  }
+
+  .ex_containerPara{
+    width: 50%;
+  }
+
+  .ex_containerForm {
+    margin-left: 10em;
+  }
+
+
+/* .extra {
+  margin-right: 2em;
+} */
+
+}

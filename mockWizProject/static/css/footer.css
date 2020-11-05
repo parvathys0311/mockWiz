@@ -1,0 +1,51 @@
+/******************/
+/* Footer Section */
+/******************/
+
+footer {
+  background-color: rgb(245, 245, 245);
+  
+  /* animation: BackgroundGradient 30s ease infinite; */
+  margin: 0;
+  padding-top: 1.5em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+}
+
+.layout p,
+.layout h4 {
+  text-align: left;
+  margin: 0;
+  /* color: rgb(223, 221, 221); */
+  color: grey;
+}
+
+
+/* Following is for "sticky" footer */
+.wrapper {
+  /* Flex is used to push the footer to the bottom of the page.*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* Required for flex box to push footer to page bottom */
+  min-height: 100vh;
+}
+
+.hero {
+  flex-grow: 1;
+}
+
+main {
+  flex-grow: 1;
+}
+
+@media (orientation: landscape) {
+  .layout p{ 
+    margin-left: 2.5em;
+  }
+  
+}
+
+
+

@@ -1,24 +1,38 @@
 
-let select = document.querySelector('.selectCdd');
-console.log(select);
+let role = document.getElementById("id_interestedRole");
+let fn = document.getElementById("id_expertiseFunction");
 
-select.onchange = function colorChange() {
-  console.log("1");
-  if (select.value != 'null') {
-    console.log('yes');
-    select.style.color = '#000';
-  } else {
-    select.style.color = '#999';
-  }
+document.onreadystatechange=function(){
+//all onload actions
+    fn.classList.add("ex-input");
+    role.style.color = '#999';
+    fn.style.color ='#999';
 }
 
+role.onchange = function colorChange() {
+    var value = role.options[role.selectedIndex].value;
+    console.log(value)
+    if (value == "")
+        role.style.color = '#999';
+    else
+        role.style.color = '#000';
+}
+
+fn.onchange = function colorChange() {
+    var value = fn.options[fn.selectedIndex].value;
+    console.log(value)
+    if (value == "")
+        fn.style.color = '#999';
+    else
+        fn.style.color = '#000';
+}
+
+
 let selectEx = document.querySelector('.selectEx');
-console.log(selectEx);
+//console.log(selectEx);
 
 selectEx.onchange = function colorChange() {
-  console.log("1");
   if (selectEx.value != 'null') {
-    console.log('yes');
     selectEx.style.color = '#000';
   } else {
     selectEx.style.color = '#999';

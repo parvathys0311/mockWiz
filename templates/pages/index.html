@@ -12,31 +12,30 @@
             <h1>Practice virtual mock interviews with experienced professionals.</h1>
             <p>Build your confidence and get hired faster.</p>
             <div>
-              <form action="#">
+              <form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
                 <ul>
                   <li>
-                    <input type="text" name="name" placeholder="First Name">
+                    {{form.formcd.firstName}}
                   </li>
                   <li>
-                    <input type="text" name="_replyto" placeholder="Email Address">
+                    {{form.formcd.email}}
+                    <p class="error">{{form.formcd.email.errors | striptags}}</p>
                   </li>
-                  <select id="role" class="selectCdd">
-                    <option value="null" disabled selected>Select your desired role</option>
-                    <option value="1" class="color">System Analyst</option>
-                    <option value="2">Accountant</option>
-                    <option value="3">Rig Manager</option>
-                    <option value="4">Data Scientist</option>
-                  </select>
                   <li>
-                    <button type="submit" class="font-small" id="cdd-button">Submit</button>
+                    {{form.formcd.interestedRole}}
+                  </li>
+                  <li>
+                    <button type="submit" value="submit" id="cdd-button" name="submit-cdd" onclick="displayError()">Submit</button>
                   </li>
                   <li>
                     <p class="font-small">By clicking Submit, you consent to our Terms of Use</p>
                   </li>
-                  <!-- <input type="submit" value="Submit"> -->
                 </ul>
               </form>
             </div>
+<!--            <div class="" id="error">-->
+
+<!--          </div>-->
           </div>
           <div class="hero2">
             <img class="hero-image" src="{% static './images/dr-13_4x (1).png' %}">
@@ -114,34 +113,46 @@
             <p>Fill this form to get details about our partner program</p>
           </div>
           <div class="exFlexItem">
-            <form action="#" class="form_expert">
+            <form class="form_expert" method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
               <ul class="ex_containerForm">
                 <li>
-                  <input type="text" name="name" placeholder="First Name" class="ex-input">
+                  {{form.formex.firstName}}
                 </li>
                 <li>
-                  <input type="text" name="_replyto" placeholder="Email Address" class="ex-input">
+                  {{form.formex.email}}
+                  <p class="error">{{form.formex.email.errors | striptags}}</p>
                 </li>
-                <select id="function" class="ex-input selectEx">
-                  <option value="" disabled selected>Select your function</option>
-                  <option value="1" class="color">Oil & Gas</option>
-                  <option value="2">Manufacturing</option>
-                  <option value="3">Information technology</option>
-                  <option value="4">Finance</option>
-                </select>
                 <li>
-                  <button type="submit" class="button-default" id="ex-button">Submit</button>
+                  {{form.formex.expertiseFunction}}
+                </li>
+                <li>
+                  <button type="submit" class="button-default" id="ex-button" name="submit-exp">Submit</button>
                 </li>
                 <li>
                   <p class="font-small">By clicking Submit, you consent to our Terms of Use</p>
                 </li>
-                <!-- <input type="submit" value="Submit"> -->
               </ul>
             </form>
           </div>
+<!--             <div>{{form.formex.email.errors | striptags}}</div>-->
         </div>
       </section>
-
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+            {% endfor %}
+        {% endif %}
     </main>
+<script>
+  let errorDiv = document.getElementById("error");
 
+function displayError(){
+  errorDiv.classList.toggle("hidden");
+  console.log("yes");
+  errorDiv.style.display = "block";
+}
+</script>
+<script src="{% static './js/accordion.js' %}"></script>
+<script src="{% static './js/formSelect.js' %}"></script>
+<script src="{% static './js/errorMessage.js' %}"></script>
 {% endblock %}

@@ -136,11 +136,5 @@ MESSAGE_TAGS = {
     messages.ERROR:'danger',
 }
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 
 

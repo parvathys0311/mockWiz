@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, EmailInput, Select, ModelChoiceField
+from django.forms import ModelForm, TextInput, EmailInput, Select, ModelChoiceField, URLInput
 
 from pagesApp.models import Function
 from .models import Expert
@@ -9,13 +9,17 @@ class Expertform(ModelForm):
     expertiseFunction = ModelChoiceField(Function.objects.all(), empty_label="Select your desired role")
     class Meta:
         model=Expert
-        fields=('firstName','email','expertiseFunction'
+        fields=('firstName','email','expertiseFunction','lastname','linkedInUrl','yearsInterviewedFor','approved'
                )
 
         widgets = {
             'firstName':TextInput(attrs={'id':'Name', 'placeholder':'First Name', 'class':'ex-input'}),
             'email': EmailInput(attrs={'id':'Email', 'placeholder':'Email Address', 'class':'ex-input'}),
             'expertiseFunction': Select(attrs={'id': 'Function', 'class': 'ex-input'}),
+            'lastname': TextInput(attrs={'id': 'LastName', 'placeholder': 'Last Name', 'class': 'ex-input'}),
+            'linkedInUrl': URLInput(attrs={'id': 'linkedInUrl', 'placeholder': 'LinkedIn Profile Url', 'class': 'ex-input'}),
+            'yearsInterviewedFor': Select(attrs={'id': 'yearsInterviewed', 'class': 'ex-input'}),
+            'approved': Select(attrs={'id': 'approved', 'class': 'ex-input'})
         }
     def clean_email(self):
         email = self.cleaned_data.get('email')

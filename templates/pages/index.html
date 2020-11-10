@@ -126,6 +126,15 @@
                   {{form.formex.expertiseFunction}}
                 </li>
                 <li>
+                  {{form.formex.lastname}}
+                </li>
+                <li>
+                  {{form.formex.linkedInUrl}}
+                </li>
+                <li>
+                  {{form.formex.yearsInterviewedFor}}
+                </li>
+                <li>
                   <button type="submit" class="button-default" id="ex-button" name="submit-exp">Submit</button>
                 </li>
                 <li>
@@ -134,7 +143,8 @@
               </ul>
             </form>
           </div>
-<!--             <div>{{form.formex.email.errors | striptags}}</div>-->
+             <div>{{form.formex.linkedInUrl.errors | striptags}}</div>
+          <div>{{form.formex.yearsInterviewedFor.errors | striptags}}</div>
         </div>
       </section>
         {% if messages %}

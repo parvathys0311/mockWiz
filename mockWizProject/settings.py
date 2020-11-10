@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'mockWizProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mockWizDB',
+        'NAME': 'mockWizDatabase',
         'USER': 'root',
         'PASSWORD': '',
         'HOST':'127.0.0.1',
@@ -136,6 +136,7 @@ MESSAGE_TAGS = {
     messages.ERROR:'danger',
 }
 
+# sengrid settings for parvathys0311 --- refer to doc
 
 
 

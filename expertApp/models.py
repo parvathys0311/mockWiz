@@ -21,7 +21,8 @@ YN_CHOICES = (
 )
 
 class Expert(models.Model):
-    expertId = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+    # expertId = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+    expertId = models.AutoField(primary_key=True)
     firstName = models.CharField(max_length=300, default='')
     lastname = models.CharField(max_length=300, default='')
     email = models.EmailField(max_length=50,default='')

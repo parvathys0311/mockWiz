@@ -36,10 +36,8 @@ def home(request):
                 return redirect('home')
 
         elif 'submit-exp' in request.POST:  # expert form submission
-            print("yes")
             formExp = Expertform(request.POST)
             if formExp.is_valid():
-                print("valid")
                 data = formExp.cleaned_data
                 # save form
                 formExp.save()
@@ -47,22 +45,49 @@ def home(request):
                 messages.success(request,
                                  'Expert form message')
                 # send confirmation email
-                # send_mail('Expert form submission', 'Here is the message.', 'parvathys0311@gmail.com',
-                #           ['parvathys0387@gmail.com'],
-                #           fail_silently=False)
+                createdExpertEmail = formExp['email'].value()
+                createdExpert = Expert.objects.filter(email=createdExpertEmail)
+                createdExpertId = createdExpert[0].expertId
+                link = "http://127.0.0.1:8000/approve/" + str(createdExpertId)
+                print(link)
+
+                send_mail('Expert form submission', f'Here is the URL -- {link}', 'parvathys0311@gmail.com',
+                          ['parvathys0387@gmail.com'],
+                          fail_silently=False)
                 return redirect('home')
     forms_new['formcd'] = formCdd
     forms_new['formex'] = formExp
     return render(request,'pages/index.html',{'form': forms_new})
 
 def approve(request, id):
-    expert = Expert.objects.filter(expertId=id)
+    expert = Expert.objects.filter(expertId=id).first()
+    print(expert.approved)
+    if request.method == 'POST':
+        form = Expertform(request.POST, instance=expert)
+        print(form)
+        if form.is_valid():
+            updatedForm = form.save(commit=False)
+            updatedForm.save()
 
-    form = Expertform(instance=expert)
-    params = {
-        'form': form,
-    }
-    return render(request, "pages/approve.html", params)
+            if(expert.approved == "N"):
+                # send email to expert -- WAITLIST
+                print("Its no")
+            else:
+                # send email to expert -- MORE INFO LINK
+                print("It is a Yes")
+            params = {
+                'form': form,
+                'message': "Successfully entered",
+            }
+            return render(request, "pages/approve.html", params)
+        else:
+            print("Error in Saving")
+    else:
+        form = Expertform(instance=expert)
+        params = {
+            'form': form,
+        }
+        return render(request, "pages/approve.html",params)
 
 
 

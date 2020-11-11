@@ -1,0 +1,23 @@
+
+.approvalForm{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  /* text-align: center; */
+}
+
+.approvalForm li{
+  display:    flex;
+  align-items: center;
+
+}
+
+.approvalForm li label {
+  width: 45%;
+}
+
+.formInput {
+   width: 60%;
+   padding-bottom: 0.6em;
+}

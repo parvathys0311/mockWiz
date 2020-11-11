@@ -21,9 +21,19 @@ class Expertform(ModelForm):
             'yearsInterviewedFor': Select(attrs={'id': 'yearsInterviewed', 'class': 'ex-input'}),
             'approved': Select(attrs={'id': 'approved', 'class': 'ex-input'})
         }
+    # def clean_email(self):
+    #     email = self.cleaned_data.get('email')
+    #     for instance in Expert.objects.all():
+    #         if instance.email == email:
+    #             raise forms.ValidationError("Email already exists. Looks like you have made an enquiry already. Our team will get back to you soon.")
+    #     return email
+
     def clean_email(self):
-        email = self.cleaned_data.get('email')
-        for instance in Expert.objects.all():
-            if instance.email == email:
-                raise forms.ValidationError("Email already exists. Looks like you have made an enquiry already. Our team will get back to you soon.")
+        email = self.cleaned_data['email']
+        if self.instance and self.instance.pk:
+            # this condition is true in case of editing the existing form data
+            return email
+        elif (Expert.objects.filter(email=email).exists()):
+            # this condition is true while registering a new form record
+            raise forms.ValidationError('Email Error')
         return email

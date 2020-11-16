@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<form method="POST" action="" enctype="multipart/form-data" > {% csrf_token %}
+    <ul class="approvalForm">
+        <li>
+            <label for="Name"> First Name </label>
+            <div class="formInput">{{form.firstName}} </div>
+        </li>
+        <li>
+            <label for="LastName"> Last Name </label>
+            <div class="formInput">{{form.lastname}} </div>
+        </li>
+
+        <li>
+            <label  for="Email"> Email </label>
+            <div class="formInput">{{form.email}} </div>
+        </li>
+        <li>
+            <label  for="Function"> Expertise Function </label>
+            <div class="formInput">{{form.expertiseFunction}} </div>
+        </li>
+        <li>
+            <label  for="linkedInUrl"> LinkedIn Url </label>
+            <div class="formInput">{{form.linkedInUrl}} </div>
+        </li>
+        <li>
+            <label  for="yearsInterviewed"> Years of Interview Experience </label>
+            <div class="formInput">{{form.yearsInterviewedFor}} </div>
+        </li>
+        <li>
+            <label  for="phoneNo"> Phone Number </label>
+            <div class="formInput">{{  form.phoneNumber}} </div>
+        </li>
+        <li>
+            <label  for="job"> Title </label>
+            <div class="formInput">{{  form.jobTitle}} </div>
+        </li>
+        <li>
+            <label  for="organization"> Organization </label>
+            <div class="formInput">{{  form.organization}} </div>
+        </li>
+        <li>
+            <label  for="imgEx"> Photo </label>
+            <div class="formInput">{{  form.imageProfile}} </div>
+        </li>
+        <li>
+            <button type="submit" value="submit" name="approve-expert">Submit</button>
+        </li>
+        <li class="alert alert-danger">
+            <p> {{message}}</p>
+        </li>
+    </ul>
+</form>
+</div>
+{% endblock %}

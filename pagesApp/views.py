@@ -19,7 +19,6 @@ def home(request):
     formCdd = Candidateform()
     formExp = Expertform()
     if request.method == 'POST':  # POST action in homepage
-        print("POST")
         if 'submit-cdd' in request.POST:  # candidate form submission
             formCdd = Candidateform(request.POST)
             if formCdd.is_valid():
@@ -30,9 +29,9 @@ def home(request):
                 messages.success(request,
                                  'You have successfully submitted your details. Our team will get back to you soon.')
                 # send confirmation email
-                send_mail('Cdd Form Submission', 'Here is the message.', 'parvathys0311@gmail.com',
-                          ['parvathys0387@gmail.com'],
-                          fail_silently=False)
+                # send_mail('Cdd Form Submission', 'Here is the message.', 'parvathys0311@gmail.com',
+                #           ['parvathys0387@gmail.com'],
+                #           fail_silently=False)
                 return redirect('home')
 
         elif 'submit-exp' in request.POST:  # expert form submission
@@ -51,9 +50,9 @@ def home(request):
                 link = "http://127.0.0.1:8000/approve/" + str(createdExpertId)
                 print(link)
 
-                send_mail('Expert form submission', f'Here is the URL -- {link}', 'parvathys0311@gmail.com',
-                          ['parvathys0387@gmail.com'],
-                          fail_silently=False)
+                # send_mail('Expert form submission', f'Here is the URL -- {link}', 'parvathys0311@gmail.com',
+                #           ['parvathys0387@gmail.com'],
+                #           fail_silently=False)
                 return redirect('home')
     forms_new['formcd'] = formCdd
     forms_new['formex'] = formExp
@@ -61,7 +60,7 @@ def home(request):
 
 def approve(request, id):
     expert = Expert.objects.filter(expertId=id).first()
-    print(expert.approved)
+    # print(expert.approved)
     if request.method == 'POST':
         form = Expertform(request.POST, instance=expert)
         print(form)
@@ -89,8 +88,29 @@ def approve(request, id):
         }
         return render(request, "pages/approve.html",params)
 
+def editProfile_Ex(request, id):
+    expert = Expert.objects.filter(expertId=id).first()
+    # print(expert.approved)
+    if request.method == 'POST':
+        form = Expertform(request.POST, instance=expert)
+        # print(form)
+        if form.is_valid():
+            updatedForm = form.save(commit=False)
+            updatedForm.save()
+            params = {
+                'form': form,
+                'message': "Successfully entered",
+            }
+            return render(request, "pages/additionalInfoExpert.html", params)
+    else:
+        form = Expertform(instance=expert)
+        params = {
+            'form': form,
+        }
+        return render(request,'pages/additionalInfoExpert.html', params)
 
-
+def expertProfile(request):
+    return render(request, 'pages/expertProfile.html')
 
 def test(request):
     # forms_new = {}

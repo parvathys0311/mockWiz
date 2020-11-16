@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, EmailInput, Select, ModelChoiceField, URLInput
+from django.forms import ModelForm, TextInput, EmailInput, Select, ModelChoiceField, URLInput, FileInput
 
 from pagesApp.models import Function
 from .models import Expert
@@ -9,7 +9,8 @@ class Expertform(ModelForm):
     expertiseFunction = ModelChoiceField(Function.objects.all(), empty_label="Select your desired role")
     class Meta:
         model=Expert
-        fields=('firstName','email','expertiseFunction','lastname','linkedInUrl','yearsInterviewedFor','approved'
+        fields=('firstName','email','expertiseFunction','lastname','linkedInUrl','yearsInterviewedFor','approved',
+                'phoneNumber','jobTitle','organization','imageProfile'
                )
 
         widgets = {
@@ -19,7 +20,11 @@ class Expertform(ModelForm):
             'lastname': TextInput(attrs={'id': 'LastName', 'placeholder': 'Last Name', 'class': 'ex-input'}),
             'linkedInUrl': URLInput(attrs={'id': 'linkedInUrl', 'placeholder': 'LinkedIn Profile Url', 'class': 'ex-input'}),
             'yearsInterviewedFor': Select(attrs={'id': 'yearsInterviewed', 'class': 'ex-input'}),
-            'approved': Select(attrs={'id': 'approved', 'class': 'ex-input'})
+            'approved': Select(attrs={'id': 'approved', 'class': 'ex-input'}),
+            'phoneNumber': TextInput(attrs={'id':'phoneNo', 'placeholder':'Phone Number', 'class':'ex-input'}),
+            'jobTitle': TextInput(attrs={'id':'job', 'placeholder':'Title', 'class':'ex-input'}),
+            'organization': TextInput(attrs={'id':'organization', 'placeholder':'Title', 'class':'ex-input'}),
+            'imageProfile': FileInput(attrs={'class': 'ex-input','id':'imgEx'}),
         }
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')

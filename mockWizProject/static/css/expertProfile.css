@@ -1,0 +1,32 @@
+.container_profile {
+  max-width: 1200px;
+  margin:auto;
+  padding: 2em;
+  text-align: center;
+}
+
+.profile {
+  margin: auto;
+  padding: 1em;
+  width:80%;
+}
+
+.profile h4, .profile h5{
+  margin: 0;
+  padding-top:0.2em;
+  color: #00c8c5;
+}
+
+.profPic {
+  width: 35%;
+}
+
+.exAboutMe {
+  margin: auto;
+  width: 80%;
+  padding: 1em;
+}
+
+.exAboutMe h4 {
+  color: black;
+}

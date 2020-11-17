@@ -1,7 +1,8 @@
 import os
 
 from django.contrib import messages
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import send_mail, send_mass_mail, EmailMessage
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -46,8 +47,8 @@ def home(request):
                 # send confirmation email
                 createdExpertEmail = formExp['email'].value()
                 createdExpert = Expert.objects.filter(email=createdExpertEmail)
-                createdExpertId = createdExpert[0].expertId
-                link = "http://127.0.0.1:8000/approve/" + str(createdExpertId)
+                createdExpertSlug = createdExpert[0].slug
+                link = "http://127.0.0.1:8000/approve/" + str(createdExpertSlug)
                 print(link)
 
                 # send_mail('Expert form submission', f'Here is the URL -- {link}', 'parvathys0311@gmail.com',
@@ -58,8 +59,12 @@ def home(request):
     forms_new['formex'] = formExp
     return render(request,'pages/index.html',{'form': forms_new})
 
-def approve(request, id):
-    expert = Expert.objects.filter(expertId=id).first()
+def approve(request, slug_text):
+    expert = Expert.objects.filter(slug=slug_text)
+    if expert.exists():
+        expert = expert.first()
+    else:
+        return HttpResponse("<h1>Page not found</h1>")
     # print(expert.approved)
     if request.method == 'POST':
         form = Expertform(request.POST, instance=expert)
@@ -88,8 +93,12 @@ def approve(request, id):
         }
         return render(request, "pages/approve.html",params)
 
-def editProfile_Ex(request, id):
-    expert = Expert.objects.filter(expertId=id).first()
+def editProfile_Ex(request, slug_text):
+    expert = Expert.objects.filter(slug=slug_text)
+    if expert.exists():
+        expert = expert.first()
+    else:
+        return HttpResponse("<h1>Page not found</h1>")
     # print(expert.approved)
     if request.method == 'POST':
         form = Expertform(request.POST, instance=expert)
@@ -97,6 +106,16 @@ def editProfile_Ex(request, id):
         if form.is_valid():
             updatedForm = form.save(commit=False)
             updatedForm.save()
+            link = "http://127.0.0.1:8000/expert/" + str(expert.slug)
+            print(link)
+            email = EmailMessage(
+                'Your MockWiz profile',
+                f'Hi User, here is the profile you created for yourself with MockWiz -- {link}.MockWiz is happy to partner with you.',
+                'parvathys0311@gmail.com',
+                ['parvathys0387@gmail.com', 'parvathy.labwork@gmail.com'],
+                ['parvathys0311@gmail.com']
+            )
+            email.send(fail_silently=False)
             params = {
                 'form': form,
                 'message': "Successfully entered",
@@ -109,8 +128,16 @@ def editProfile_Ex(request, id):
         }
         return render(request,'pages/additionalInfoExpert.html', params)
 
-def expertProfile(request):
-    return render(request, 'pages/expertProfile.html')
+def expertProfile(request,slug_text):
+    expert = Expert.objects.filter(slug=slug_text)
+    if expert.exists():
+        expert = expert.first()
+    else:
+        return HttpResponse("<h1>Page not found</h1>")
+    params = {
+        'expert': expert
+    }
+    return render(request, 'pages/expertProfile.html',params)
 
 def test(request):
     # forms_new = {}
@@ -165,7 +192,6 @@ def test(request):
     return render(request, "pages/test.html")
 
 def sendgridtest(request):
-
     send_mail('Subject here', 'Here is the message.', 'parvathys0387@gmail.com',
               ['parvathys0311@gmail.com'],
               fail_silently=False)

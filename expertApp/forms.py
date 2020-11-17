@@ -25,6 +25,9 @@ class Expertform(ModelForm):
             'jobTitle': TextInput(attrs={'id':'job', 'placeholder':'Title', 'class':'ex-input'}),
             'organization': TextInput(attrs={'id':'organization', 'placeholder':'Title', 'class':'ex-input'}),
             'imageProfile': FileInput(attrs={'class': 'ex-input','id':'imgEx'}),
+            'city': TextInput(attrs={'id': 'City', 'placeholder': 'City', 'class': 'ex-input'}),
+            'country': TextInput(attrs={'id': 'Country', 'placeholder': 'Country', 'class': 'ex-input'}),
+            'summary': TextInput(attrs={'id': 'Summary', 'placeholder': 'Tell Us about you in few words', 'class': 'ex-input'}),
         }
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')

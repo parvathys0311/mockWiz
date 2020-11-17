@@ -39,6 +39,7 @@ class Expert(models.Model):
     imageProfile = models.ImageField(upload_to='expert/profilePicture', default='./mockWizProject/static/images/default.png', blank=True)
     city = models.CharField(max_length=100, default='', blank=True)
     country = models.CharField(max_length=100, default='', blank=True)
+    summary = models.TextField(default='')
     slug = models.SlugField(max_length=250,null=True,blank=True)
 
     def __str__(self):

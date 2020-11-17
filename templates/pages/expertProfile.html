@@ -5,26 +5,16 @@
 {% block content %}
 <main class="container_profile flex-box column">
     <div class="profile background-1">
-        <h2>Dan Camerion</h2>
-        <div class="profImg"><img class="profPic" src="{% static './images/profEx_1.jpg' %}" alt="Profile Picture"></div>
-        <h4>Software Manager</h4>
-        <h5>Amazon Inc</h5>
+        <h2>{{expert.firstName}} {{expert.lastname}} </h2>
+        <div class="profImg"><img class="profPic" src="/media/{{expert.imageProfile}}" alt="Profile Picture"></div>
+        <h4>{{expert.jobTitle}}</h4>
+        <h5>{{expert.organization}}</h5>
         <section class="exAboutMe">
             <h4>A Little bit about Me</h4>
             <div>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into
-                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-                    release
-                    of
-                    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                    like
-                    Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>{{expert.summary}}</p>
             </div>
-            <h4>Follow me on LinkedIn <a href="">@DanCamerion</a></h4>
+            <h4>Follow me on LinkedIn <a href="{{expert.linkedInUrl}}">@{{expert.firstName}}{{expert.lastname}}</a></h4>
         </section>
         <button>Book a Call</button>
     </div>

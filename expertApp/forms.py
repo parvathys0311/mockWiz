@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, EmailInput, Select, ModelChoiceField, URLInput, FileInput
+from django.forms import ModelForm, TextInput, EmailInput, Select, ModelChoiceField, URLInput, FileInput, Textarea
 
 from pagesApp.models import Function
 from .models import Expert
@@ -10,7 +10,7 @@ class Expertform(ModelForm):
     class Meta:
         model=Expert
         fields=('firstName','email','expertiseFunction','lastname','linkedInUrl','yearsInterviewedFor','approved',
-                'phoneNumber','jobTitle','organization','imageProfile'
+                'phoneNumber','jobTitle','organization','imageProfile','city','country','summary'
                )
 
         widgets = {
@@ -27,7 +27,7 @@ class Expertform(ModelForm):
             'imageProfile': FileInput(attrs={'class': 'ex-input','id':'imgEx'}),
             'city': TextInput(attrs={'id': 'City', 'placeholder': 'City', 'class': 'ex-input'}),
             'country': TextInput(attrs={'id': 'Country', 'placeholder': 'Country', 'class': 'ex-input'}),
-            'summary': TextInput(attrs={'id': 'Summary', 'placeholder': 'Tell Us about you in few words', 'class': 'ex-input'}),
+            'summary': Textarea(attrs={'id': 'Summary', 'placeholder': 'Tell Us about you in few words', 'class': 'ex-input'}),
         }
     # def clean_email(self):
     #     email = self.cleaned_data.get('email')

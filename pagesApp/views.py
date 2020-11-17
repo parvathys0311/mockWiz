@@ -101,18 +101,21 @@ def editProfile_Ex(request, slug_text):
         return HttpResponse("<h1>Page not found</h1>")
     # print(expert.approved)
     if request.method == 'POST':
-        form = Expertform(request.POST, instance=expert)
+        form = Expertform(request.POST, request.FILES, instance=expert)
         # print(form)
         if form.is_valid():
             updatedForm = form.save(commit=False)
+            updatedForm.imageProfile= request.FILES['imageProfile']
             updatedForm.save()
+            senderEmail = expert.email
+            name = expert.firstName
             link = "http://127.0.0.1:8000/expert/" + str(expert.slug)
             print(link)
             email = EmailMessage(
                 'Your MockWiz profile',
-                f'Hi User, here is the profile you created for yourself with MockWiz -- {link}.MockWiz is happy to partner with you.',
+                f'Hi {name}, here is the profile you created for yourself with MockWiz -- {link} .MockWiz is happy to partner with you.',
                 'parvathys0311@gmail.com',
-                ['parvathys0387@gmail.com', 'parvathy.labwork@gmail.com'],
+                [senderEmail, 'parvathy.labwork@gmail.com'],
                 ['parvathys0311@gmail.com']
             )
             email.send(fail_silently=False)

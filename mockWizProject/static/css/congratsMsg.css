@@ -1,0 +1,12 @@
+.messageBox {
+  margin: auto;
+  text-align: center;
+  height: 100vh;
+}
+.messageBox a{
+  text-decoration: underline;
+}
+
+.msgCongrats_1 {
+  color: #00c8c5;
+}

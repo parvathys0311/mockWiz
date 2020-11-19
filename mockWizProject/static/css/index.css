@@ -67,7 +67,7 @@ form ul {
   justify-content: center;
 }
 
-input, select, option {
+input, select, option, Textarea {
   margin-top: 0.8em;
   padding: 0.4em 0;
 
@@ -79,6 +79,10 @@ input, select, option {
 
   width: 70%;
   background-color: transparent;
+}
+
+Textarea {
+    border: 0.5px solid rgb(116, 114, 114);
 }
 
 input:focus, select:focus{

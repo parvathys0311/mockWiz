@@ -1,4 +1,5 @@
 import os
+import uuid
 
 from django.contrib import messages
 from django.core.mail import send_mail, send_mass_mail, EmailMessage
@@ -16,9 +17,11 @@ from expertApp.models import Expert
 
 
 def home(request):
+    # home page has 2 forms - Candidateform & Experform
     forms_new = {}
     formCdd = Candidateform()
     formExp = Expertform()
+    print(formExp)
     if request.method == 'POST':  # POST action in homepage
         if 'submit-cdd' in request.POST:  # candidate form submission
             formCdd = Candidateform(request.POST)
@@ -30,30 +33,39 @@ def home(request):
                 messages.success(request,
                                  'You have successfully submitted your details. Our team will get back to you soon.')
                 # send confirmation email
-                # send_mail('Cdd Form Submission', 'Here is the message.', 'parvathys0311@gmail.com',
-                #           ['parvathys0387@gmail.com'],
-                #           fail_silently=False)
+                try:
+                    send_mail('Cdd Form Submission', 'Here is the message.', 'parvathys0311@gmail.com',
+                          ['parvathys0387@gmail.com'],
+                          fail_silently=False)
+                except Exception:
+                    pass
                 return redirect('home')
 
         elif 'submit-exp' in request.POST:  # expert form submission
             formExp = Expertform(request.POST)
+            print(formExp)
             if formExp.is_valid():
                 data = formExp.cleaned_data
                 # save form
                 formExp.save()
-                # display message for user
-                messages.success(request,
-                                 'Expert form message')
-                # send confirmation email
+                # display success message for user
+                messages.success(request,'Expert form is submitted successfully')
+
                 createdExpertEmail = formExp['email'].value()
                 createdExpert = Expert.objects.filter(email=createdExpertEmail)
+
+                # send confirmation email to expert on successful form submission
+                name = createdExpert[0].firstName
+                email = createdExpert[0].email
+                send_mail('Welcome to MockWiz', f'Hi {name}, thanks for registering with us.We will get back to you soon.', 'parvathys0311@gmail.com',
+                          [email],fail_silently=False)
+
+                # send an email to admin to approve the expert profile
                 createdExpertSlug = createdExpert[0].slug
                 link = "http://127.0.0.1:8000/approve/" + str(createdExpertSlug)
-                print(link)
-
-                # send_mail('Expert form submission', f'Here is the URL -- {link}', 'parvathys0311@gmail.com',
-                #           ['parvathys0387@gmail.com'],
-                #           fail_silently=False)
+                send_mail('Approve the expert Profile submitted', f'Here is the URL -- {link} to approve', 'parvathys0311@gmail.com',
+                          ['parvathys0387@gmail.com'],
+                          fail_silently=False)
                 return redirect('home')
     forms_new['formcd'] = formCdd
     forms_new['formex'] = formExp
@@ -68,19 +80,31 @@ def approve(request, slug_text):
     # print(expert.approved)
     if request.method == 'POST':
         form = Expertform(request.POST, instance=expert)
-        print(form)
         if form.is_valid():
             updatedForm = form.save(commit=False)
             updatedForm.save()
 
+            # retrieve expert info
+            name = expert.firstName
+            email = expert.email
+
             if(expert.approved == "N"):
-                # send email to expert -- WAITLIST
-                print("Its no")
+                # (not approved) send email to expert -- WAITLIST status
+                send_mail('Member Status',
+                          f'Hi {name}, You are on waitinglist',
+                          'parvathys0311@gmail.com',
+                          [email], fail_silently=False)
             else:
-                # send email to expert -- MORE INFO LINK
-                print("It is a Yes")
+                # (approved) send email to expert -- provide link to add more info to their profile
+
+                random = randomidgenerator() # create a random id to add to url - for security
+                link = f"http://127.0.0.1:8000/edit/{random}/" + str(expert.slug)
+                send_mail('Member Status',
+                          f'Hi {name}, We are excited to inform that your application is approved. Next step is to build a portfolio for you with MockWiz. Give us more info about you and we shall do the rest. Update your profile here - {link} .',
+                          'parvathys0311@gmail.com',
+                          [email], fail_silently=False)
             params = {
-                'form': form,
+                'form': updatedForm,
                 'message': "Successfully entered",
             }
             return render(request, "pages/approve.html", params)
@@ -93,7 +117,7 @@ def approve(request, slug_text):
         }
         return render(request, "pages/approve.html",params)
 
-def editProfile_Ex(request, slug_text):
+def editProfile_Ex(request, randomId, slug_text):
     expert = Expert.objects.filter(slug=slug_text)
     if expert.exists():
         expert = expert.first()
@@ -101,29 +125,68 @@ def editProfile_Ex(request, slug_text):
         return HttpResponse("<h1>Page not found</h1>")
     # print(expert.approved)
     if request.method == 'POST':
-        form = Expertform(request.POST, request.FILES, instance=expert)
+        form = Expertform(request.POST, request.FILES or None, instance=expert)
         # print(form)
         if form.is_valid():
             updatedForm = form.save(commit=False)
-            updatedForm.imageProfile= request.FILES['imageProfile']
-            updatedForm.save()
+            try:
+                updatedForm.imageProfile = request.FILES['imageProfile']
+            except Exception:
+                pass
+
+            if updatedForm.imageProfile:
+                updatedForm.save()
+            else:
+                print("no image")
+                params = {
+                            'form': form,
+                            'message': 'Please upload a picture'
+                        }
+                return render(request, 'pages/additionalInfoExpert.html', params)
+
+            # except:
+            #     params = {
+            #         'form': form,
+            #         'message': 'Please upload a picture'
+            #     }
+            #     return render(request, 'pages/additionalInfoExpert.html', params)
+
+            # submission success message
+            # messages.success(request,
+            #                  'Successful submission')
+
+            # retrieve expert info
             senderEmail = expert.email
             name = expert.firstName
+            # create a link for profile page of the expert
             link = "http://127.0.0.1:8000/expert/" + str(expert.slug)
-            print(link)
+            editLink = f"http://127.0.0.1:8000/edit/{randomId}/" + str(expert.slug)
+
+            # send email to expert with link to their profile page
             email = EmailMessage(
                 'Your MockWiz profile',
-                f'Hi {name}, here is the profile you created for yourself with MockWiz -- {link} .MockWiz is happy to partner with you.',
+                f'Hi {name}, View the profile you created with MockWiz -- {link} .MockWiz is happy to partner with you. If you wish to update your profile, you can do via {editLink}',
                 'parvathys0311@gmail.com',
                 [senderEmail, 'parvathy.labwork@gmail.com'],
                 ['parvathys0311@gmail.com']
             )
             email.send(fail_silently=False)
+
+            # params = {
+            #     'form': updatedForm,
+            # }
+            # return render(request, "pages/additionalInfoExpert.html", params)
+
+            # redirect expert to their profile page
+            # return redirect(link)
+
+            return render(request,"pages/congratulations.html")
+        else:
             params = {
                 'form': form,
-                'message': "Successfully entered",
+                'message':'Oops.Something went wrong. Please try again'
             }
-            return render(request, "pages/additionalInfoExpert.html", params)
+            return render(request, 'pages/additionalInfoExpert.html', params)
     else:
         form = Expertform(instance=expert)
         params = {
@@ -141,6 +204,14 @@ def expertProfile(request,slug_text):
         'expert': expert
     }
     return render(request, 'pages/expertProfile.html',params)
+
+def randomidgenerator():
+    s = str(uuid.uuid4())
+    print(s)
+    firstNineChars = s.split("-",1)
+    print(firstNineChars)
+    randomString = "C" + str(firstNineChars[0])
+    return randomString
 
 def test(request):
     # forms_new = {}

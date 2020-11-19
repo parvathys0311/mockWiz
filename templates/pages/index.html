@@ -119,21 +119,22 @@
                   {{form.formex.firstName}}
                 </li>
                 <li>
+                  {{form.formex.lastname}}
+                </li>
+                <li>
                   {{form.formex.email}}
                   <p class="error">{{form.formex.email.errors | striptags}}</p>
-                </li>
-                <li>
-                  {{form.formex.expertiseFunction}}
-                </li>
-                <li>
-                  {{form.formex.lastname}}
                 </li>
                 <li>
                   {{form.formex.linkedInUrl}}
                 </li>
                 <li>
+                  {{form.formex.expertiseFunction}}
+                </li>
+                <li>
                   {{form.formex.yearsInterviewedFor}}
                 </li>
+
                 <li>
                   <button type="submit" class="button-default" id="ex-button" name="submit-exp">Submit</button>
                 </li>
@@ -153,15 +154,7 @@
             {% endfor %}
         {% endif %}
     </main>
-<script>
-  let errorDiv = document.getElementById("error");
 
-function displayError(){
-  errorDiv.classList.toggle("hidden");
-  console.log("yes");
-  errorDiv.style.display = "block";
-}
-</script>
 <script src="{% static './js/accordion.js' %}"></script>
 <script src="{% static './js/formSelect.js' %}"></script>
 <script src="{% static './js/errorMessage.js' %}"></script>

@@ -6,6 +6,11 @@
 
 <form method="POST" action="" enctype="multipart/form-data" > {% csrf_token %}
     <ul class="approvalForm">
+        {% if message %}
+            <li class="alert-message">
+                <p> {{message}}</p>
+            </li>
+        {% endif %}
         <li>
             <label for="Name"> First Name </label>
             <div class="formInput">{{form.firstName}} </div>
@@ -44,8 +49,14 @@
             <div class="formInput">{{  form.organization}} </div>
         </li>
         <li>
-            <label  for="imgEx"> Photo </label>
-            <div class="formInput">{{  form.imageProfile}} </div>
+            <label  for="Summary"> Expertise Area</label>
+            <div class="formInput">{{  form.expertise}} </div>
+        </li>
+        <li>
+            <label  for="imgEx"> Profile Photo </label>
+            {% if form.imageProfile %}
+            {{  form.imageProfile}}
+            {% endif %}
         </li>
         <li>
             <label  for="City"> City </label>
@@ -62,10 +73,12 @@
         <li>
             <button type="submit" value="submit" name="approve-expert">Submit</button>
         </li>
-        <li class="alert alert-danger">
-            <p> {{message}}</p>
-        </li>
+
     </ul>
 </form>
-</div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

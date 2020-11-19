@@ -10,7 +10,7 @@ class Expertform(ModelForm):
     class Meta:
         model=Expert
         fields=('firstName','email','expertiseFunction','lastname','linkedInUrl','yearsInterviewedFor','approved',
-                'phoneNumber','jobTitle','organization','imageProfile','city','country','summary'
+                'phoneNumber','jobTitle','organization','imageProfile','city','country','summary','published','expertise'
                )
 
         widgets = {
@@ -23,10 +23,11 @@ class Expertform(ModelForm):
             'approved': Select(attrs={'id': 'approved', 'class': 'ex-input'}),
             'phoneNumber': TextInput(attrs={'id':'phoneNo', 'placeholder':'Phone Number', 'class':'ex-input'}),
             'jobTitle': TextInput(attrs={'id':'job', 'placeholder':'Title', 'class':'ex-input'}),
-            'organization': TextInput(attrs={'id':'organization', 'placeholder':'Title', 'class':'ex-input'}),
-            'imageProfile': FileInput(attrs={'class': 'ex-input','id':'imgEx'}),
+            'organization': TextInput(attrs={'id':'organization', 'placeholder':'Organization', 'class':'ex-input'}),
+            # 'imageProfile': FileInput(attrs={'class': 'ex-input','id':'imgEx'}),
             'city': TextInput(attrs={'id': 'City', 'placeholder': 'City', 'class': 'ex-input'}),
             'country': TextInput(attrs={'id': 'Country', 'placeholder': 'Country', 'class': 'ex-input'}),
+            'expertise': Textarea(attrs={'id': 'exp', 'placeholder': 'Enter keywords related to your expertise, for ex, Project Management, Quality Assurance', 'class':'ex-input'}),
             'summary': Textarea(attrs={'id': 'Summary', 'placeholder': 'Tell Us about you in few words', 'class': 'ex-input'}),
         }
     # def clean_email(self):

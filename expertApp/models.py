@@ -36,11 +36,14 @@ class Expert(models.Model):
     phoneNumber = PhoneField(help_text='Contact phone number',default='',blank=True)
     jobTitle = models.CharField(max_length=100, default='', blank=True)
     organization = models.CharField(max_length=200, default='', blank=True)
-    imageProfile = models.ImageField(upload_to='expert/profilePicture', default='./mockWizProject/static/images/default.png', blank=True)
+    imageProfile = models.ImageField(upload_to='expert/profilePicture', default='./mockWizProject/static/images/default.png', blank=True, null=True)
     city = models.CharField(max_length=100, default='', blank=True)
     country = models.CharField(max_length=100, default='', blank=True)
-    summary = models.TextField(default='')
+    expertise = models.TextField(default='', blank=True)
+    summary = models.TextField(default='',blank=True)
     slug = models.SlugField(max_length=250,null=True,blank=True)
+
+    published = models.CharField(max_length=1, choices=YN_CHOICES,default='N', blank=True)
 
     def __str__(self):
         return self.firstName

@@ -1,10 +1,7 @@
 
 .approvalForm{
-  margin: auto;
-  display: flex;
-  flex-direction: column;
+  margin: 0 auto;
   width: 700px;
-  /* text-align: center; */
 }
 
 .approvalForm li{
@@ -20,4 +17,14 @@
 .formInput {
    width: 60%;
    padding-bottom: 0.6em;
+}
+
+.phone-field-ext { display: none; }
+
+#id_phoneNumber_0{
+    width: 90%;
+}
+
+#id_phoneNumber_1{
+    width: 0%;
 }
